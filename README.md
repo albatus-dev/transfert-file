@@ -1,8 +1,6 @@
 # transfert-file webapp
 transfert-file webapp is developped in java/dropwizard for uploading/downloading encrypted files
 
-#RUN
-
 ## Clone the project and open it into your IDE (Eclipse, IntelliJ, ..)
 
 ## Modify config.yml file : 
