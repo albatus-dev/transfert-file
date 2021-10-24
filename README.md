@@ -10,7 +10,7 @@ transfert-file webapp is developped in java/dropwizard for uploading/downloading
 ## Launch the app
 
 ## Test the file upload feature
-#### Open Postman and execute this request : POST http://localhost:8080/file/upload
+#### Open Postman and execute this request : POST http://localhost:8080/file/upload or execute the cmd curl -X POST http://localhost:8080/file/upload
 
 ## Test the file download feature
-#### From your browser execute this request : http://localhost:8080/file/download/$fileToUpload
+#### From your browser execute this request : http://localhost:8080/file/download/$fileToUpload or  execute cmd curl -X GET http://localhost:8080/file/download/$fileToUpload
