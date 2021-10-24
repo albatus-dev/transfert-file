@@ -8,7 +8,6 @@ transfert-file webapp is developped in java/dropwizard for uploading/downloading
   ### Create a file $fileToUpload into #fileUploadPathInput to upload it to the server 
 
 ## Launch the app
-###Execute the code
 
 ## Test the file upload feature
 ### Open Postman and execute this request : POST http://localhost:8080/file/upload
