@@ -4,7 +4,7 @@ transfert-file webapp is developped in java/dropwizard for uploading/downloading
 ## Clone the project and open it into your IDE (Eclipse, IntelliJ, ..)
 
 ## Modify config.yml file : 
-  ### Define values for these variables from your local directories fileUploadPathInput, fileUploadPathOutput and fileDownloadFolder
+  #### Define values for these variables from your local directories fileUploadPathInput, fileUploadPathOutput and fileDownloadFolder
   ### Create a file $fileToUpload into #fileUploadPathInput to upload it to the server 
 
 ## Launch the app
