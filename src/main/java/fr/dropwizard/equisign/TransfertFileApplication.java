@@ -10,9 +10,9 @@ import io.dropwizard.setup.Environment;
 
 public class TransfertFileApplication extends Application<TransfertFileConfiguration> {
 
-	private static final String server = "server";
-	private static final String application = "transfert-file";
-	private static String config = ("src/main/resources/config.yml");
+	private static final String SERVER = "server";
+	private static final String APPLICATION = "transfert-file";
+	private static final String CONFIG = ("src/main/resources/config.yml");
 	// AES key
 	// private static KeySingletonAes keySingletonAes;
 	// AES key
@@ -22,7 +22,7 @@ public class TransfertFileApplication extends Application<TransfertFileConfigura
 
 		// keySingletonAes = KeySingletonAes.getInstance();
 		keySingletonRsa = KeySingletonRsa.getInstance();
-		new TransfertFileApplication().run(server, config);
+		new TransfertFileApplication().run(SERVER, CONFIG);
 	}
 
 	@Override
@@ -31,6 +31,6 @@ public class TransfertFileApplication extends Application<TransfertFileConfigura
 				keySingletonRsa.getPublicKey()));
 		env.jersey()
 				.register(new FileDowloadResource(transFileConf.getDownloadFolder(), keySingletonRsa.getPrivateKey()));
-		env.healthChecks().register(application, new TransfertFileHealthCheck());
+		env.healthChecks().register(APPLICATION, new TransfertFileHealthCheck());
 	}
 }
