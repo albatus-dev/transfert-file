@@ -22,25 +22,14 @@ public class CryptoUtils {
 			Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-			byte[] buffer = new byte[64];
-			int bytesRead;
-			while ((bytesRead = fis.read(buffer)) != -1) {
-				byte[] output = cipher.update(buffer, 0, bytesRead);
-				if (output != null) {
-					fos.write(output);
-				}
-			}
-			byte[] outputBytes = cipher.doFinal();
-			if (outputBytes != null) {
-				fos.write(outputBytes);
-			}
+			processCrypto(fis, fos, cipher);
 		} catch (Exception exe) {
-			// TODO
+			System.out.println("An error occurred during encrypting file with AES Algorithm");
 		}
 	}
 
 	public static File decrypt(File fileToDownload, SecretKey secretKey) {
-		File tmpFile = new File("tempFile");
+		File tmpFile = new File("tmpFile");
 
 		try (FileInputStream fis = new FileInputStream(fileToDownload);
 				FileOutputStream fos = new FileOutputStream(tmpFile)) {
@@ -48,20 +37,9 @@ public class CryptoUtils {
 			Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
 			cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
-			byte[] buffer = new byte[64];
-			int bytesRead;
-			while ((bytesRead = fis.read(buffer)) != -1) {
-				byte[] output = cipher.update(buffer, 0, bytesRead);
-				if (output != null) {
-					fos.write(output);
-				}
-			}
-			byte[] outputBytes = cipher.doFinal();
-			if (outputBytes != null) {
-				fos.write(outputBytes);
-			}
+			processCrypto(fis, fos, cipher);
 		} catch (Exception exe) {
-			// TODO
+			System.out.println("An error occurred during decrypting file with AES Algorithm");
 		}
 
 		return tmpFile;
@@ -75,20 +53,9 @@ public class CryptoUtils {
 			Cipher cipher = Cipher.getInstance(ALGORITHM_RSA);
 			cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 
-			byte[] buffer = new byte[64];
-			int bytesRead;
-			while ((bytesRead = fis.read(buffer)) != -1) {
-				byte[] output = cipher.update(buffer, 0, bytesRead);
-				if (output != null) {
-					fos.write(output);
-				}
-			}
-			byte[] outputBytes = cipher.doFinal();
-			if (outputBytes != null) {
-				fos.write(outputBytes);
-			}
+			processCrypto(fis, fos, cipher);
 		} catch (Exception exe) {
-			// TODO
+			System.out.println("An error occurred during encrypting file with RSA Algorithm");
 		}
 	}
 
@@ -101,22 +68,26 @@ public class CryptoUtils {
 			Cipher cipher = Cipher.getInstance(ALGORITHM_RSA);
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
 
-			byte[] buffer = new byte[64];
-			int bytesRead;
-			while ((bytesRead = fis.read(buffer)) != -1) {
-				byte[] output = cipher.update(buffer, 0, bytesRead);
-				if (output != null) {
-					fos.write(output);
-				}
-			}
-			byte[] outputBytes = cipher.doFinal();
-			if (outputBytes != null) {
-				fos.write(outputBytes);
-			}
+			processCrypto(fis, fos, cipher);
 		} catch (Exception exe) {
-			// TODO
+			System.out.println("An error occurred during decrypting file with RSA Algorithm");
 		}
 
 		return tmpFile;
+	}
+
+	private static void processCrypto(FileInputStream fis, FileOutputStream fos, Cipher cipher) throws Exception {
+		byte[] buffer = new byte[64];
+		int bytesRead;
+		while ((bytesRead = fis.read(buffer)) != -1) {
+			byte[] output = cipher.update(buffer, 0, bytesRead);
+			if (output != null) {
+				fos.write(output);
+			}
+		}
+		byte[] outputBytes = cipher.doFinal();
+		if (outputBytes != null) {
+			fos.write(outputBytes);
+		}
 	}
 }

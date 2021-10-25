@@ -7,10 +7,18 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 public class KeySingletonRsa {
-	private static final KeySingletonRsa instance = new KeySingletonRsa();
+
+	private static final String ALGORITHM = "RSA";
+	private static KeySingletonRsa instance;
 	private PrivateKey privateKey;
 	private PublicKey publicKey;
-	private static final String ALGORITHM = "RSA";
+
+	public static final KeySingletonRsa getInstance() {
+		if (instance == null) {
+			instance = new KeySingletonRsa();
+		}
+		return instance;
+	}
 
 	private KeySingletonRsa() {
 
@@ -21,12 +29,8 @@ public class KeySingletonRsa {
 			this.privateKey = pair.getPrivate();
 			this.publicKey = pair.getPublic();
 		} catch (NoSuchAlgorithmException e) {
-			// TODO
+			System.out.println("An error occurred during generating RSA keyPair");
 		}
-	}
-
-	public static final KeySingletonRsa getInstance() {
-		return instance;
 	}
 
 	public PrivateKey getPrivateKey() {

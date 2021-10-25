@@ -16,28 +16,30 @@ import fr.dropwizard.equisign.utils.CryptoUtils;
 @Path("/file")
 public class FileDowloadResource {
 
-	private String fileDownloadFolder;
+	private String downloadFolder;
 	// AES key
 	// private SecretKey secretKey;
 	// RSA key
 	private PrivateKey privateKey;
 
-	public FileDowloadResource(String fileDownloadFolder, SecretKey secretKey) {
-		this.fileDownloadFolder = fileDownloadFolder;
+	public FileDowloadResource(String downloadFolder, SecretKey secretKey) {
+		this.downloadFolder = downloadFolder;
 		// this.secretKey = secretKey;
 	}
 
-	public FileDowloadResource(String fileDownloadFolder, PrivateKey privateKey) {
-		this.fileDownloadFolder = fileDownloadFolder;
+	public FileDowloadResource(String downloadFolder, PrivateKey privateKey) {
+		this.downloadFolder = downloadFolder;
 		this.privateKey = privateKey;
 	}
 
 	@GET
 	@Produces(MediaType.MULTIPART_FORM_DATA)
-	@Path("/download/{fileName}")
-	public Response downloadFile(@PathParam("fileName") String fileName) throws Exception {
+	@Path("/download/{fileName}/{ext}")
+	public Response downloadFile(@PathParam("fileName") String fileName, @PathParam("ext") String ext)
+			throws Exception {
 		File file = null;
-		File fileToDownload = new File(fileDownloadFolder.concat(fileName));
+		File fileToDownload = new File(downloadFolder.concat(fileName).concat(".").concat(ext));
+
 		if (fileToDownload.exists()) {
 			// Decrypt the file using AES algorithm
 			// file = CryptoUtils.decrypt(fileToDownload, secretKey);
@@ -47,8 +49,6 @@ public class FileDowloadResource {
 		} else {
 			return Response.status(204, "File not exists").build();
 		}
-
 		return Response.ok(file).build();
 	}
-
 }

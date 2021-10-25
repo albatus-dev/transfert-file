@@ -9,26 +9,18 @@ import io.dropwizard.Configuration;
 public class TransfertFileConfiguration extends Configuration {
 
 	@NotEmpty
-	private String fileUploadPathInput;
+	private String uploadFolder;
 
 	@JsonProperty
-	public String getFileUploadPathInput() {
-		return fileUploadPathInput;
+	public String getUploadFolder() {
+		return uploadFolder;
 	}
 
 	@NotEmpty
-	private String fileUploadPathOutput;
+	private String downloadFolder;
 
 	@JsonProperty
-	public String getFileUploadPathOutput() {
-		return fileUploadPathOutput;
-	}
-
-	@NotEmpty
-	private String fileDownloadFolder;
-
-	@JsonProperty
-	public String getFileDownloadFolder() {
-		return fileDownloadFolder;
+	public String getDownloadFolder() {
+		return downloadFolder;
 	}
 }
