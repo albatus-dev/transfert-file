@@ -1,18 +1,19 @@
-# JAVA-DROPWIZARD
-Create a webapp in java/dropwizard for uploading/downloading encrypted files
+# transfert-file webapp
+transfert-file webapp is developped in java/dropwizard for uploading/downloading encrypted files using 2 Algorithm RSA && AES
 
-#How to test the app
-
-## Open the project into your IDE (Eclipse, IntelliJ, ..)
+## Clone the project and open it into your IDE (Eclipse, IntelliJ, ..)
+#### Execute cmd git clone git@github.com:AlbatusDev/JAVA-DROPWIZARD.git
 
 ## Modify config.yml file : 
-  ### Define values for these variables from your localDirectories fileUploadPathInput, fileUploadPathOutput and fileDownloadFolder
-  ### Create a first file to upload into the server into #fileUploadPathInput
+  #### Define values for these variables from your local directories uploadFolder and downloadFolder
+  #### Create a file $fileToUpload into #uploadFolder to upload it to the server 
 
 ## Launch the app
 
-## Test the file upload feature
-### Open Postman and execute this request : POST http://localhost:8080/file/upload
+## Upload feature
+#### Open Postman and execute this request : POST http://localhost:8080/file/upload/$fileToUpload/ext or execute the cmd curl -X POST http://localhost:8080/file/upload/$fileToUpload/ext
+example of url :  http://localhost:8080/file/upload/myFile/txt
 
-## Test the file download feature
-### From your browser execute this request : http://localhost:8080/file/download/$youruploadedFile
+## Download feature
+#### From your browser execute this request : http://localhost:8080/file/download/$fileToUploadEncrypted/ext or  execute cmd curl -X GET http://localhost:8080/file/download/$fileToUploadEncrypted/ext 
+example of url : http://localhost:8080/file/download/myFileEncrypted/txt
