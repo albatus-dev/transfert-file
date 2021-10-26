@@ -2,7 +2,7 @@
 transfert-file webapp is developped in java/dropwizard for uploading/downloading encrypted files using the asymmetric encryption algorithm RSA
 
 ## Clone the project and open it into your IDE (Eclipse, IntelliJ, ..)
-#### Execute cmd git clone git@github.com:AlbatusDev/transfert-file.git
+#### Execute the cmd : git clone git@github.com:AlbatusDev/transfer-file.git
 
 ## Modify config.yml file : 
   #### Define values for these variables from your local directories uploadFolder and downloadFolder
