@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.dropwizard.Configuration;
 
-public class TransfertFileConfiguration extends Configuration {
+public class TransferFileConfiguration extends Configuration {
 
 	@NotEmpty
 	private String uploadFolder;

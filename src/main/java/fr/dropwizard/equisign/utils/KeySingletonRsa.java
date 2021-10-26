@@ -1,5 +1,7 @@
 package fr.dropwizard.equisign.utils;
 
+import fr.dropwizard.equisign.exception.TransferFileException;
+
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -10,17 +12,17 @@ public class KeySingletonRsa {
 
 	private static final String ALGORITHM = "RSA";
 	private static KeySingletonRsa instance;
-	private PrivateKey privateKey;
-	private PublicKey publicKey;
+	private final PrivateKey privateKey;
+	private final PublicKey publicKey;
 
-	public static final KeySingletonRsa getInstance() {
+	public static synchronized KeySingletonRsa getInstance() throws TransferFileException {
 		if (instance == null) {
 			instance = new KeySingletonRsa();
 		}
 		return instance;
 	}
 
-	private KeySingletonRsa() {
+	private KeySingletonRsa() throws TransferFileException {
 
 		try {
 			KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
@@ -28,8 +30,8 @@ public class KeySingletonRsa {
 			KeyPair pair = keyGen.generateKeyPair();
 			this.privateKey = pair.getPrivate();
 			this.publicKey = pair.getPublic();
-		} catch (NoSuchAlgorithmException e) {
-			System.out.println("An error occurred during generating RSA keyPair");
+		} catch (NoSuchAlgorithmException nae) {
+			throw new TransferFileException("An error occurred during generating RSA keyPair", nae);
 		}
 	}
 
